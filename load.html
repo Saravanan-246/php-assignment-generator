@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>PHP Assignment Generator - Loading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0f172a;
+            --sky-bg: #e0f2fe;
+            --electric-blue: #2563eb;
+            --bright-blue: #3b82f6;
+            --sunny-yellow: #facc15;
+            --mint-green: #4ade80;
+            --card-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--sky-bg);
+            /* Halftone comic polka-dot pattern */
+            background-image: radial-gradient(#93c5fd 2px, transparent 2px);
+            background-size: 24px 24px;
+            font-family: 'Fredoka', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: var(--ink);
+            transition: transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
+        }
+
+        body.fade-out {
+            opacity: 0;
+            transform: scale(0.85) rotate(-3deg);
+        }
+
+        /* Floating Cartoon Code Stickers in Background */
+        .floating-sticker {
+            position: absolute;
+            background: var(--card-white);
+            border: 3px solid var(--ink);
+            box-shadow: 4px 4px 0px var(--ink);
+            border-radius: 14px;
+            padding: 8px 14px;
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--electric-blue);
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sticker-1 {
+            top: 12%;
+            left: 10%;
+            background: var(--sunny-yellow);
+            color: var(--ink);
+            transform: rotate(-12deg);
+            animation: floatBounce 3.2s ease-in-out infinite alternate;
+        }
+
+        .sticker-2 {
+            bottom: 14%;
+            right: 10%;
+            background: #bfdbfe;
+            color: var(--ink);
+            transform: rotate(10deg);
+            animation: floatBounce 2.8s ease-in-out infinite alternate-reverse;
+        }
+
+        .sticker-3 {
+            top: 18%;
+            right: 12%;
+            background: var(--card-white);
+            transform: rotate(8deg);
+            animation: floatBounce 3.6s ease-in-out infinite alternate;
+        }
+
+        /* Main Cartoon Window Card */
+        .cartoon-card {
+            position: relative;
+            z-index: 2;
+            width: 92%;
+            max-width: 420px;
+            background: var(--card-white);
+            border: 4px solid var(--ink);
+            border-radius: 28px;
+            box-shadow: 10px 10px 0px var(--ink);
+            overflow: hidden;
+            animation: popCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cartoon-card.ready-bounce {
+            transform: translate(-3px, -3px);
+            box-shadow: 13px 13px 0px var(--ink);
+        }
+
+        /* Retro Cartoon Top Window Bar */
+        .window-header {
+            background: var(--bright-blue);
+            border-bottom: 4px solid var(--ink);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .w-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2.5px solid var(--ink);
+            background: var(--card-white);
+        }
+
+        .w-dot:nth-child(1) { background: #f87171; }
+        .w-dot:nth-child(2) { background: var(--sunny-yellow); }
+        .w-dot:nth-child(3) { background: var(--mint-green); }
+
+        .window-tag {
+            background: var(--card-white);
+            border: 2.5px solid var(--ink);
+            border-radius: 999px;
+            padding: 2px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            box-shadow: 2px 2px 0px var(--ink);
+            text-transform: uppercase;
+        }
+
+        /* Card Body */
+        .card-body {
+            padding: 1.8rem 1.75rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* TV / Gameboy Frame for Video */
+        .tv-frame {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            background: #dbeafe;
+            border: 4px solid var(--ink);
+            border-radius: 26px;
+            box-shadow: 6px 6px 0px var(--ink);
+            padding: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: gentleWiggle 3s ease-in-out infinite;
+        }
+
+        .tv-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--card-white);
+            border: 3px solid var(--ink);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        /* Comic Sticker Badge that pops on 100% */
+        .comic-pop-badge {
+            position: absolute;
+            top: -14px;
+            right: -18px;
+            background: var(--sunny-yellow);
+            color: var(--ink);
+            border: 3px solid var(--ink);
+            box-shadow: 3px 3px 0px var(--ink);
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: scale(0) rotate(12deg);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 4;
+        }
+
+        .comic-pop-badge.show {
+            transform: scale(1) rotate(12deg);
+        }
+
+        /* Chunky Cartoon Title */
+        h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--ink);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* Comic Speech Pill for Status Text */
+        .speech-bubble {
+            background: #eff6ff;
+            border: 2.5px solid var(--ink);
+            border-radius: 14px;
+            padding: 6px 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--electric-blue);
+            margin-bottom: 1.4rem;
+            box-shadow: 3px 3px 0px var(--ink);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .speech-bubble.pop {
+            transform: scale(1.06);
+        }
+
+        /* Chunky Striped Candy Progress Bar */
+        .progress-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cartoon-bar-shell {
+            flex: 1;
+            height: 26px;
+            background: #f1f5f9;
+            border: 3.5px solid var(--ink);
+            border-radius: 999px;
+            box-shadow: inset 0 3px 0 rgba(0,0,0,0.08), 4px 4px 0px var(--ink);
+            overflow: hidden;
+            padding: 3px;
+        }
+
+        .cartoon-bar-fill {
+            width: 0%;
+            height: 100%;
+            background-color: var(--bright-blue);
+            /* Moving diagonal cartoon stripes */
+            background-image: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.28) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.28) 50%,
+                rgba(255, 255, 255, 0.28) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 24px 24px;
+            border-radius: 999px;
+            animation: moveStripes 0.7s linear infinite;
+            transition: background-color 0.3s ease;
+        }
+
+        .cartoon-bar-fill.complete {
+            background-color: var(--mint-green);
+        }
+
+        .percent-pill {
+            min-width: 58px;
+            text-align: center;
+            background: var(--sunny-yellow);
+            border: 3px solid var(--ink);
+            border-radius: 12px;
+            padding: 4px 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 3px 3px 0px var(--ink);
+        }
+
+        /* Keyframes */
+        @keyframes popCard {
+            0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 24px 0; }
+        }
+
+        @keyframes floatBounce {
+            0% { transform: translateY(0px) rotate(-8deg); }
+            100% { transform: translateY(-12px) rotate(6deg); }
+        }
+
+        @keyframes gentleWiggle {
+            0%, 100% { transform: rotate(-1.5deg); }
+            50% { transform: rotate(1.5deg); }
+        }
+
+        @media (max-width: 420px) {
+            .floating-sticker { display: none; }
+            .card-body { padding: 1.5rem 1.25rem 1.6rem; }
+            .tv-frame { width: 150px; height: 150px; }
+            h1 { font-size: 1.28rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fun Background Floating PHP Stickers -->
+    <div class="floating-sticker sticker-1">&lt;?php</div>
+    <div class="floating-sticker sticker-2">echo "A+";</div>
+    <div class="floating-sticker sticker-3">{ code }</div>
+
+    <!-- Main Cartoon Card -->
+    <main class="cartoon-card" id="card">
+        <!-- Retro Browser Top Header -->
+        <div class="window-header">
+            <div class="window-dots">
+                <span class="w-dot"></span>
+                <span class="w-dot"></span>
+                <span class="w-dot"></span>
+            </div>
+            <span class="window-tag" id="topTag">PHP.EXE</span>
+        </div>
+
+        <div class="card-body">
+            <!-- Cartoon TV Frame around Video -->
+            <div class="tv-frame">
+                <div class="comic-pop-badge" id="boomBadge">BOOM! READY!</div>
+                <div class="tv-screen">
+                    <video autoplay muted playsinline loop>
+                        <source src="assets/loading.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h1>PHP Assignment Generator</h1>
+
+            <!-- Dynamic Comic Speech Bubble -->
+            <div class="speech-bubble" id="speechBubble">
+                Waking up the PHP elephants...
+            </div>
+
+            <!-- Candy Striped Progress Bar + Yellow Score Box -->
+            <div class="progress-row">
+                <div class="cartoon-bar-shell">
+                    <div class="cartoon-bar-fill" id="barFill"></div>
+                </div>
+                <div class="percent-pill" id="percentPill">0%</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Set the startup flag immediately so index.html knows the loader has been displayed
+        sessionStorage.setItem('phpAssignmentStartupLoader', 'completed');
+
+        const barFill = document.getElementById('barFill');
+        const percentPill = document.getElementById('percentPill');
+        const speechBubble = document.getElementById('speechBubble');
+        const boomBadge = document.getElementById('boomBadge');
+        const topTag = document.getElementById('topTag');
+        const card = document.getElementById('card');
+
+        const duration = 4200; // Hits 100% at 4.2s, celebrates until 4.65s, redirects at 5.0s
+        const startTime = performance.now();
+        let lastStep = -1;
+        let redirected = false;
+
+        function redirectToApp() {
+            if (redirected) return;
+            redirected = true;
+            window.location.replace('index.html' + (window.location.search || ''));
+        }
+
+        const funSteps = [
+            { at: 0,  text: "Waking up the PHP elephants..." },
+            { at: 32, text: "Cooking fresh code templates..." },
+            { at: 68, text: "Polishing semicolons ; ; ;" },
+            { at: 95, text: "All done! Let's gooo!" }
+        ];
+
+        function updateCartoonLoader(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const percent = Math.round(progress * 100);
+
+            barFill.style.width = `${percent}%`;
+            percentPill.textContent = `${percent}%`;
+
+            // Update speech bubble with a quick pop animation
+            for (let i = funSteps.length - 1; i >= 0; i--) {
+                if (percent >= funSteps[i].at) {
+                    if (lastStep !== i) {
+                        lastStep = i;
+                        speechBubble.textContent = funSteps[i].text;
+                        speechBubble.classList.add('pop');
+                        setTimeout(() => speechBubble.classList.remove('pop'), 180);
+                    }
+                    break;
+                }
+            }
+
+            if (elapsed < duration) {
+                requestAnimationFrame(updateCartoonLoader);
+            } else {
+                // 100% Cartoon Celebration State
+                barFill.classList.add('complete');
+                boomBadge.classList.add('show');
+                card.classList.add('ready-bounce');
+                topTag.textContent = "100% OK!";
+            }
+        }
+
+        requestAnimationFrame(updateCartoonLoader);
+
+        // Exact 5-second timing rule: fade at 4.65s, redirect at 5.0s
+        setTimeout(() => {
+            document.body.classList.add('fade-out');
+            setTimeout(redirectToApp, 350);
+        }, 4650);
+
+        // Fallback hard redirect at exactly 5000ms
+        setTimeout(redirectToApp, 5000);
+    </script>
+</body>
+</html>
+

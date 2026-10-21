@@ -1,0 +1,71 @@
+@media (max-width: 900px) {
+  .student-screen { grid-template-columns: 1fr; min-height: auto; gap: 28px; padding: 28px 0; }
+  .intro-panel { padding: 0; }
+  .intro-panel h1 { max-width: 650px; }
+  .student-form { max-width: 560px; }
+  .workspace-layout { grid-template-columns: 250px minmax(0, 1fr); gap: 16px; }
+  .program-header, .question-section, .code-section { padding-left: 22px; padding-right: 22px; }
+  .program-actions { padding-left: 22px; padding-right: 22px; }
+  .output-section, .completion-note { margin-left: 22px; margin-right: 22px; }
+}
+
+@media (max-width: 700px) {
+  .header-inner, .page-main, .site-footer { width: min(100% - 28px, 560px); }
+  .header-inner { min-height: 62px; }
+  .header-student { display: none; }
+  .logout-button { border-left: 0; padding-left: 0; }
+  .page-main { padding: 30px 0 50px; }
+  .workspace-topbar { display: block; margin-bottom: 20px; }
+  .workspace-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; }
+  .progress-summary { width: 100%; margin-top: 16px; }
+  .workspace-layout { display: block; }
+  .program-sidebar { min-height: 0; margin-bottom: 16px; }
+  .program-list { max-height: 245px; overflow-y: auto; }
+  .program-workspace { min-width: 0; }
+  .program-header { padding: 21px 18px 18px; }
+  .program-header h2 { font-size: 23px; }
+  .question-section, .code-section { padding-left: 18px; padding-right: 18px; }
+  .input-panel { margin-left: 18px; margin-right: 18px; }
+  .program-actions { align-items: stretch; flex-direction: column; padding: 16px 18px 20px; }
+  .action-group { width: 100%; }
+  .action-group .button { flex: 1; }
+  .run-status { order: -1; }
+  .output-section, .completion-note { margin-left: 18px; margin-right: 18px; }
+  .output-preview { min-height: 95px; }
+}
+
+@media (max-width: 430px) {
+  .brand { font-size: 14px; }
+  .brand-mark { width: 31px; height: 31px; }
+  .student-form { padding: 22px 18px; }
+  .student-form-grid { grid-template-columns: 1fr; }
+  .student-form-grid .full-width { grid-column: auto; }
+  .intro-copy { font-size: 15px; }
+  .intro-points { display: grid; gap: 9px; }
+  .code-editor { min-height: 260px; padding: 13px; font-size: 11px; }
+  .completion-pill { font-size: 10px; }
+}
+
+@media (max-width: 900px) {
+  .workspace-screen .workspace-layout { grid-template-columns: 220px minmax(0, 1fr); }
+  .program-studio { grid-template-columns: 1fr; }
+  .code-panel { border-right: 0; border-bottom: 1px solid #d8dade; }
+}
+
+@media (max-width: 700px) {
+  .workspace-screen .workspace-layout { display: block; }
+  .workspace-screen .program-sidebar { margin-bottom: 16px; border-right: 0; }
+  .workspace-screen .program-list { max-height: 190px; }
+  .workspace-screen .workspace-topbar { display: block; }
+  .workspace-screen .workspace-actions { align-items: stretch; flex-direction: column; }
+  .workspace-screen .progress-summary { margin-top: 0; }
+  .workspace-screen .program-header { align-items: flex-start; flex-direction: column; padding: 18px; }
+  .workspace-screen .program-header-actions { width: 100%; justify-content: space-between; }
+  .workspace-screen .question-section { padding: 17px 18px; }
+  .workspace-screen .input-panel { margin-right: 18px; margin-left: 18px; }
+  .workspace-screen .program-actions { align-items: stretch; flex-direction: column; padding: 14px 18px 17px; }
+  .workspace-screen .action-group { width: 100%; }
+  .workspace-screen .action-group .button { flex: 1; }
+  .editor-shell, .console-content { height: 360px; }
+  .workspace-screen .html-output-preview { min-height: 360px; }
+}

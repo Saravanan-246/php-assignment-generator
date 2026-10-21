@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script>
+    (function () {
+      var key = 'phpAssignmentStartupLoader';
+      if (sessionStorage.getItem(key) === 'completed') {
+        sessionStorage.removeItem(key);
+      } else {
+        window.location.replace('loading.html' + (window.location.search || ''));
+      }
+    })();
+  </script>
+  <meta name="description" content="PHP Assignment Generator">
+  <title>PHP Assignment Generator</title>
+
+  <!-- Cartoon & Coding Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Original Stylesheets Kept Intact -->
+  <link rel="stylesheet" href="css/style.css?v=20261021-0700">
+  <link rel="stylesheet" href="css/responsive.css?v=20261021-0700">
+
+  <!-- Cartoon Neo-Brutalist UI/UX Theme Layer (Zero Logic Impact) -->
+  <style>
+    :root {
+      --c-ink: #0f172a;
+      --c-sky: #e0f2fe;
+      --c-blue: #2563eb;
+      --c-blue-bright: #3b82f6;
+      --c-blue-soft: #dbeafe;
+      --c-yellow: #facc15;
+      --c-yellow-soft: #fef9c3;
+      --c-green: #4ade80;
+      --c-coral: #fb7185;
+      --c-white: #ffffff;
+      --c-slate: #475569;
+      --c-shadow-lg: 8px 8px 0px #0f172a;
+      --c-shadow-md: 5px 5px 0px #0f172a;
+      --c-shadow-sm: 3px 3px 0px #0f172a;
+      --c-border: 3px solid #0f172a;
+    }
+
+    /* Respect [hidden] attribute strictly so JS screen toggling never breaks */
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      background-color: var(--c-sky) !important;
+      background-image: radial-gradient(#93c5fd 2px, transparent 2px) !important;
+      background-size: 24px 24px !important;
+      font-family: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      color: var(--c-ink) !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Background Cartoon Stickers */
+    .cartoon-bg-decor {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .c-sticker {
+      position: absolute;
+      background: var(--c-white);
+      border: 3px solid var(--c-ink);
+      box-shadow: 4px 4px 0px var(--c-ink);
+      border-radius: 14px;
+      padding: 6px 14px;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--c-ink);
+      user-select: none;
+    }
+
+    .c-sticker.s1 {
+      top: 90px;
+      left: 3%;
+      background: var(--c-yellow);
+      transform: rotate(-10deg);
+      animation: stickerFloat 3.4s ease-in-out infinite alternate;
+    }
+
+    .c-sticker.s2 {
+      bottom: 65px;
+      right: 3%;
+      background: var(--c-green);
+      transform: rotate(8deg);
+      animation: stickerFloat 2.9s ease-in-out infinite alternate-reverse;
+    }
+
+    .c-sticker.s3 {
+      top: 130px;
+      right: 4%;
+      background: #bfdbfe;
+      transform: rotate(6deg);
+      animation: stickerFloat 3.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes stickerFloat {
+      0% { transform: translateY(0px) rotate(-6deg); }
+      100% { transform: translateY(-10px) rotate(6deg); }
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ==================== HEADER ==================== */
+    .site-header {
+      background: var(--c-white) !important;
+      border-bottom: 4px solid var(--c-ink) !important;
+      padding: 0.85rem 1.5rem !important;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 0px rgba(15, 23, 42, 0.08);
+    }
+
+    .header-inner {
+      max-width: 1340px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none !important;
+      color: var(--c-ink) !important;
+      font-size: 1.25rem !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.01em;
+      transition: transform 0.15s ease;
+    }
+
+    .brand:hover {
+      transform: translate(-2px, -2px);
+    }
+
+    .brand-mark {
+      background: var(--c-yellow) !important;
+      color: var(--c-ink) !important;
+      border: 3px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 12px !important;
+      padding: 0.3rem 0.6rem !important;
+      font-family: 'Space Grotesk', monospace !important;
+      font-weight: 700 !important;
+      font-size: 1rem !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-session {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .header-student {
+      background: var(--c-blue-soft) !important;
+      color: var(--c-ink) !important;
+      border: 2.5px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 999px !important;
+      padding: 0.4rem 1rem !important;
+      font-size: 0.88rem !important;
+      font-weight: 700 !important;
+    }
+
+    .logout-button {
+      background: var(--c-coral) !important;
+      color: var(--c-white) !important;
+      border: 2.5px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 12px !important;
+      padding: 0.42rem 0.95rem !important;
+      font-family: 'Fredoka', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+    }
+
+    .logout-button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--c-ink) !important;
+    }
+
+    .logout-button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--c-ink) !important;
+    }
+
+    /* ==================== MAIN CONTAINER ==================== */
+    .page-main {
+      flex: 1;
+      width: 100%;
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem;
+    }
+
+    /* ==================== EYEBROW & TYPOGRAPHY ==================== */
+    .eyebrow {
+      display: inline-block !important;
+      background: var(--c-yellow) !important;
+      color: var(--c-ink) !important;
+      border: 2.5px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 999px !important;
+      padding: 0.25rem 0.85rem !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 0.76rem !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+      margin-bottom: 0.9rem !important;
+    }
+
+    h1, h2, h3 {
+      color: var(--c-ink) !important;
+      font-family: 'Fredoka', sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    /* ==================== STUDENT SCREEN (WELCOME + LOGIN) ==================== */
+    .student-screen {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .intro-panel {
+      background: var(--c-white) !important;
+      border: 4px solid var(--c-ink) !important;
+      border-radius: 28px !important;
+      box-shadow: var(--c-shadow-lg) !important;
+      padding: 2.25rem 2rem !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-panel::after {
+      content: '<?php';
+      position: absolute;
+      bottom: -12px;
+      right: 16px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 4.2rem;
+      font-weight: 700;
+      color: rgba(37, 99, 235, 0.08);
+      pointer-events: none;
+      transform: rotate(-6deg);
+    }
+
+    #welcome-title {
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem) !important;
+      line-height: 1.18 !important;
+      margin-bottom: 0.85rem !important;
+    }
+
+    .intro-copy {
+      font-size: 1.05rem !important;
+      color: var(--c-slate) !important;
+      line-height: 1.55 !important;
+      margin-bottom: 1.5rem !important;
+      font-weight: 500 !important;
+    }
+
+    .intro-points {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 0.65rem !important;
+    }
+
+    .intro-points span {
+      background: var(--c-blue-soft) !important;
+      color: var(--c-ink) !important;
+      border: 2.5px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 14px !important;
+      padding: 0.45rem 0.9rem !important;
+      font-size: 0.88rem !important;
+      font-weight: 700 !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intro-points span:nth-child(2) {
+      background: var(--c-green) !important;
+    }
+
+    .intro-points span:nth-child(3) {
+      background: var(--c-yellow-soft) !important;
+    }
+
+    /* Cartoon Window Card for Student Form */
+    .panel,
+    .student-form {
+      background: var(--c-white) !important;
+      border: 4px solid var(--c-ink) !important;
+      border-radius: 28px !important;
+      box-shadow: var(--c-shadow-lg) !important;
+    }
+
+    .student-form {
+      padding: 0 !important;
+      overflow: hidden;
+    }
+
+    .cartoon-window-bar {
+      background: var(--c-blue-bright);
+      border-bottom: 4px solid var(--c-ink);
+      padding: 11px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .c-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .c-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2.5px solid var(--c-ink);
+    }
+
+    .c-dot.r { background: #f87171; }
+    .c-dot.y { background: var(--c-yellow); }
+    .c-dot.g { background: var(--c-green); }
+
+    .c-window-title {
+      background: var(--c-white);
+      border: 2px solid var(--c-ink);
+      box-shadow: 2px 2px 0px var(--c-ink);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--c-ink);
+    }
+
+    .student-form-body {
+      padding: 1.75rem 1.75rem 2rem;
+    }
+
+    .panel-heading h2 {
+      font-size: 1.55rem !important;
+      margin-bottom: 0.25rem !important;
+    }
+
+    .panel-heading p {
+      color: var(--c-slate) !important;
+      font-size: 0.95rem !important;
+    }
+
+    .student-form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      margin: 1.35rem 0 1.5rem;
+    }
+
+    .student-form-grid label {
+      display: block;
+      font-weight: 700 !important;
+      font-size: 0.92rem !important;
+      color: var(--c-ink) !important;
+      margin-bottom: 0.45rem !important;
+    }
+
+    /* Inputs & Roll Field */
+    input[type="text"],
+    input[type="search"],
+    textarea,
+    select {
+      font-family: 'Fredoka', sans-serif !important;
+      font-size: 0.98rem !important;
+      font-weight: 600 !important;
+      color: var(--c-ink) !important;
+      background: #f8fafc !important;
+      border: 3px solid var(--c-ink) !important;
+      border-radius: 14px !important;
+      padding: 0.75rem 1rem !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      outline: none !important;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease !important;
+      width: 100%;
+    }
+
+    input[type="text"]:focus,
+    input[type="search"]:focus,
+    textarea:focus {
+      background: var(--c-white) !important;
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--c-blue) !important;
+    }
+
+    .roll-field {
+      display: flex !important;
+      align-items: stretch !important;
+      border: 3px solid var(--c-ink) !important;
+      border-radius: 14px !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      overflow: hidden !important;
+      background: var(--c-white) !important;
+    }
+
+    .roll-field > span {
+      background: var(--c-yellow) !important;
+      color: var(--c-ink) !important;
+      border-right: 3px solid var(--c-ink) !important;
+      padding: 0 1rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      font-family: 'Space Grotesk', monospace !important;
+      font-weight: 700 !important;
+      font-size: 0.95rem !important;
+    }
+
+    .roll-field input {
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      flex: 1;
+    }
+
+    .roll-field input:focus {
+      transform: none !important;
+      box-shadow: none !important;
+      background: #fefce8 !important;
+    }
+
+    /* ==================== CARTOON 3D BUTTONS ==================== */
+    .button,
+    button[type="submit"],
+    button[data-action] {
+      font-family: 'Fredoka', sans-serif !important;
+      font-weight: 700 !important;
+      border: 3px solid var(--c-ink) !important;
+      border-radius: 16px !important;
+      box-shadow: 4px 4px 0px var(--c-ink) !important;
+      cursor: pointer !important;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease, background-color 0.15s ease !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .button-primary {
+      background: var(--c-blue-bright) !important;
+      color: var(--c-white) !important;
+      padding: 0.8rem 1.4rem !important;
+      font-size: 1rem !important;
+    }
+
+    .button-primary:hover {
+      background: var(--c-blue) !important;
+      transform: translate(-2px, -2px) !important;
+      box-shadow: 6px 6px 0px var(--c-ink) !important;
+    }
+
+    .button-primary:active {
+      transform: translate(2px, 2px) !important;
+      box-shadow: 1px 1px 0px var(--c-ink) !important;
+    }
+
+    .button-wide {
+      width: 100% !important;
+    }
+
+    /* ==================== WORKSPACE SCREEN ==================== */
+    .workspace-topbar {
+      background: var(--c-white) !important;
+      border: 4px solid var(--c-ink) !important;
+      border-radius: 24px !important;
+      box-shadow: var(--c-shadow-md) !important;
+      padding: 1.25rem 1.5rem !important;
+      margin-bottom: 1.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 1.25rem !important;
+      flex-wrap: wrap !important;
+    }
+
+    #workspace-title {
+      font-size: 1.55rem !important;
+      margin: 0 !important;
+    }
+
+    .workspace-actions {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      flex-wrap: wrap !important;
+    }
+
+    /* Striped Candy Progress Tracker */
+    .progress-summary {
+      background: #f8fafc !important;
+      border: 3px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 16px !important;
+      padding: 0.55rem 1rem !important;
+      min-width: 210px;
+    }
+
+    #progress-count {
+      display: block;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      color: var(--c-ink) !important;
+      margin-bottom: 0.35rem !important;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 14px !important;
+      background: #e2e8f0 !important;
+      border: 2.5px solid var(--c-ink) !important;
+      border-radius: 999px !important;
+      overflow: hidden !important;
+      padding: 1px;
+    }
+
+    #progress-bar {
+      display: block;
+      height: 100% !important;
+      background-color: var(--c-green) !important;
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.35) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.35) 50%,
+        rgba(255, 255, 255, 0.35) 75%,
+        transparent 75%,
+        transparent
+      ) !important;
+      background-size: 20px 20px !important;
+      border-radius: 999px !important;
+      transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+
+    /* ==================== WORKSPACE 2-COLUMN LAYOUT ==================== */
+    .workspace-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Program Sidebar */
+    .program-sidebar {
+      padding: 1.25rem !important;
+      background: var(--c-white) !important;
+      border: 4px solid var(--c-ink) !important;
+      border-radius: 24px !important;
+      box-shadow: var(--c-shadow-md) !important;
+    }
+
+    .sidebar-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-heading h2 {
+      font-size: 1.25rem !important;
+      margin: 0 !important;
+    }
+
+    .muted-text {
+      color: var(--c-slate) !important;
+      font-weight: 600 !important;
+      font-size: 0.84rem !important;
+    }
+
+    .icon-button {
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 12px !important;
+      background: var(--c-yellow) !important;
+      color: var(--c-ink) !important;
+      border: 2.5px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      font-size: 1.1rem !important;
+      font-weight: 700 !important;
+    }
+
+    .search-box {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+      background: #f8fafc !important;
+      border: 3px solid var(--c-ink) !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      border-radius: 14px !important;
+      padding: 0.45rem 0.85rem !important;
+      margin-bottom: 1rem !important;
+    }
+
+    .search-box input {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0.25rem 0 !important;
+      background: transparent !important;
+    }
+
+    .search-box input:focus {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Dynamic Program List Items (Generated by app.js) */
+    .program-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-height: 62vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .program-list > * {
+      border: 2.5px solid var(--c-ink) !important;
+      border-radius: 14px !important;
+      background: #f8fafc !important;
+      box-shadow: 3px 3px 0px var(--c-ink) !important;
+      transition: transform 0.12s ease, background-color 0.12s ease !important;
+      font-family: 'Fredoka', sans-serif !important;
+      font-weight: 600 !important;
+    }
+
+    .program-list > *:hover {
+      background: var(--c-blue-soft) !important;
+      transform: translate(-2px, -2px);
+    }
+
+    .program-list > *.active,
+    .program-list > *[aria-current="true"],
+    .program-list > *.is-active {
+      background: var(--c-yellow) !important;
+      color: var(--c-ink) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Dynamic Program Workspace Area (Generated by app.js) */
+    .program-workspace {
+      background: var(--c-white) !important;
+      border: 4px solid var(--c-ink) !important;
+      border-radius: 24px !important;
+      box-shadow: var(--c-shadow-md) !important;
+      padding: 1.5rem !important;
+      min-height: 460px;
+    }
+
+    .program-workspace pre,
+    .program-workspace code,
+    .program-workspace textarea {
+      font-family: 'JetBrains Mono', monospace !important;
+    }
+
+    .program-workspace textarea {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+      border: 3px solid var(--c-ink) !important;
+      border-radius: 16px !important;
+      box-shadow: 4px 4px 0px var(--c-blue) !important;
+      padding: 1rem !important;
+      line-height: 1.55 !important;
+    }
+
+    /* ==================== FOOTER ==================== */
+    .site-footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--c-ink);
+      background: var(--c-white);
+      border-top: 4px solid var(--c-ink);
+      margin-top: auto;
+    }
+
+    /* ==================== RESPONSIVE (MOBILE + TABLET) ==================== */
+    @media (max-width: 960px) {
+      .student-screen {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+
+      .workspace-layout {
+        grid-template-columns: 1fr !important;
+      }
+
+      .program-list {
+        max-height: 280px;
+      }
+
+      .c-sticker {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .site-header {
+        padding: 0.75rem 1rem !important;
+      }
+
+      .brand {
+        font-size: 1.05rem !important;
+      }
+
+      .page-main {
+        padding: 1.15rem 0.85rem !important;
+      }
+
+      .intro-panel,
+      .student-form-body,
+      .program-workspace,
+      .program-sidebar,
+      .workspace-topbar {
+        padding: 1.2rem 1rem !important;
+        border-radius: 20px !important;
+      }
+
+      .workspace-actions {
+        width: 100%;
+        justify-content: stretch !important;
+      }
+
+      .progress-summary,
+      .workspace-actions .button {
+        width: 100% !important;
+      }
+    }
+  </style>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (var i = 0; i < registrations.length; i++) {
+          registrations[i].unregister();
+        }
+      });
+    }
+  </script>
+  <script type="importmap">
+  {
+    "imports": {
+      "./programs.js": "./js/programs.js?v=20261021-0700",
+      "./compiler.js": "./js/compiler.js?v=20261021-0700",
+      "./pdf.js": "./js/pdf.js?v=20261021-0700",
+      "./student.js": "./js/student.js?v=20261021-0700",
+      "./storage.js": "./js/storage.js?v=20261021-0700",
+      "./parser.js": "./js/parser.js?v=20261021-0700",
+      "./runtime.js": "./js/runtime.js?v=20261021-0700",
+      "./html.js": "./js/html.js?v=20261021-0700",
+      "./js/programs.js": "./js/programs.js?v=20261021-0700",
+      "./js/compiler.js": "./js/compiler.js?v=20261021-0700",
+      "./js/pdf.js": "./js/pdf.js?v=20261021-0700",
+      "./js/student.js": "./js/student.js?v=20261021-0700",
+      "./js/storage.js": "./js/storage.js?v=20261021-0700",
+      "./js/parser.js": "./js/parser.js?v=20261021-0700",
+      "./js/runtime.js": "./js/runtime.js?v=20261021-0700",
+      "./js/html.js": "./js/html.js?v=20261021-0700"
+    },
+    "scopes": {
+      "./js/": {
+        "./programs.js": "./js/programs.js?v=20261021-0700",
+        "./compiler.js": "./js/compiler.js?v=20261021-0700",
+        "./pdf.js": "./js/pdf.js?v=20261021-0700",
+        "./student.js": "./js/student.js?v=20261021-0700",
+        "./storage.js": "./js/storage.js?v=20261021-0700",
+        "./parser.js": "./js/parser.js?v=20261021-0700",
+        "./runtime.js": "./js/runtime.js?v=20261021-0700",
+        "./html.js": "./js/html.js?v=20261021-0700",
+        "./js/programs.js": "./js/programs.js?v=20261021-0700",
+        "./js/compiler.js": "./js/compiler.js?v=20261021-0700",
+        "./js/pdf.js": "./js/pdf.js?v=20261021-0700",
+        "./js/student.js": "./js/student.js?v=20261021-0700",
+        "./js/storage.js": "./js/storage.js?v=20261021-0700",
+        "./js/parser.js": "./js/parser.js?v=20261021-0700",
+        "./js/runtime.js": "./js/runtime.js?v=20261021-0700",
+        "./js/html.js": "./js/html.js?v=20261021-0700"
+      }
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Decorative Cartoon PHP Stickers (purely visual, pointer-events: none) -->
+  <div class="cartoon-bg-decor" aria-hidden="true">
+    <div class="c-sticker s1">&lt;?php</div>
+    <div class="c-sticker s2">echo "19/19";</div>
+    <div class="c-sticker s3">$code = true;</div>
+  </div>
+
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#" data-action="home" aria-label="PHP Assignment Generator home">
+          <span class="brand-mark">&lt;/&gt;</span>
+          <span>PHP Assignment Generator</span>
+        </a>
+        <div class="header-session">
+          <div class="header-student" id="header-student" hidden></div>
+          <button class="logout-button" id="logout-button" type="button" data-action="logout" hidden>Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="screen student-screen" id="student-screen" aria-labelledby="welcome-title">
+        <div class="intro-panel">
+          <p class="eyebrow">Academic practice workspace</p>
+          <h1 id="welcome-title">Build confidence with PHP, one program at a time.</h1>
+          <p class="intro-copy">Complete the 19 guided programs, run each solution, and keep your progress in one focused workspace.</p>
+          <div class="intro-points" aria-label="Assignment features">
+            <span>19 core programs</span>
+            <span>Real execution output</span>
+            <span>Completion tracking</span>
+          </div>
+        </div>
+        <form class="student-form panel" id="student-form">
+          <!-- Cartoon Retro Window Top Bar -->
+          <div class="cartoon-window-bar" aria-hidden="true">
+            <div class="c-dots">
+              <span class="c-dot r"></span>
+              <span class="c-dot y"></span>
+              <span class="c-dot g"></span>
+            </div>
+            <span class="c-window-title">LOGIN.PHP</span>
+          </div>
+          <div class="student-form-body">
+            <div class="panel-heading">
+              <p class="eyebrow">Get started</p>
+              <h2>Student details</h2>
+              <p>Enter your details to begin the assignment.</p>
+            </div>
+            <div class="student-form-grid">
+              <div class="full-width"><label for="student-name">Name</label><input id="student-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Enter your name"></div>
+              <div class="full-width"><label for="student-roll">Roll Number</label><div class="roll-field"><span aria-hidden="true">24UGCS</span><input id="student-roll" name="rollDigits" type="text" inputmode="numeric" autocomplete="off" required maxlength="20" pattern="[0-9]+" placeholder="Enter last digits" aria-label="Last roll number digits"></div></div>
+            </div>
+            <button class="button button-primary button-wide" type="submit">Start Assignment <span aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <section class="screen workspace-screen" id="workspace-screen" hidden aria-label="Assignment workspace">
+        <div class="workspace-topbar">
+          <div>
+            <p class="eyebrow">Assignment workspace</p>
+            <h1 id="workspace-title">Your PHP programs</h1>
+          </div>
+          <div class="workspace-actions">
+            <div class="progress-summary" aria-live="polite">
+              <span id="progress-count">0 of 19 completed</span>
+              <div class="progress-track"><span id="progress-bar"></span></div>
+            </div>
+            <button class="button button-primary" type="button" data-action="generate-pdf">Generate Assignment PDF</button>
+          </div>
+        </div>
+
+        <div class="workspace-layout">
+          <aside class="program-sidebar panel" aria-label="Program navigation">
+            <div class="sidebar-heading">
+              <div>
+                <h2>Programs</h2>
+                <span id="program-total" class="muted-text">19 exercises</span>
+              </div>
+              <button class="icon-button" type="button" data-action="edit-student" title="Edit student details" aria-label="Edit student details">↺</button>
+            </div>
+            <label class="search-box" for="program-search">
+              <span aria-hidden="true">⌕</span>
+              <input id="program-search" type="search" placeholder="Search programs" autocomplete="off">
+            </label>
+            <div class="program-list" id="program-list"></div>
+            <p class="empty-search" id="empty-search" hidden>No programs match your search.</p>
+          </aside>
+
+          <section class="program-workspace" id="program-workspace" aria-live="polite"></section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">PHP Assignment Generator <span aria-hidden="true">·</span> Academic practice tool</footer>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="js/app.js?v=20261021-0700"></script>
+</body>
+</html>
