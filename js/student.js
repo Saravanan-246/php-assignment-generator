@@ -1,4 +1,4 @@
-const ROLL_PREFIX = '24UGCS';
+const ROLL_PREFIX = '24UGCSC';
 const STUDENT_FIELDS = [
   { name: 'name', label: 'Name', autocomplete: 'name', placeholder: 'Enter your name' },
   { name: 'rollNumber', label: 'Roll Number', autocomplete: 'off', placeholder: 'Enter last digits' }
